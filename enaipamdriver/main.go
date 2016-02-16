@@ -24,7 +24,7 @@ func init() {
 	// Output to stderr instead of stdout, could also be a file.
 	log.SetOutput(os.Stderr)
 
-	// Only log the warning severity or above.
+	// Only log the warning debug or above.
 	log.SetLevel(log.DebugLevel)
 }
 
@@ -49,6 +49,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	log.Debugf("I'm listening")
 	h := ipam.NewHandler(d)
 	h.ServeTCP("enaipamdriver", ":8888")
 }
