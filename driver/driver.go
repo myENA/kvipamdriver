@@ -92,7 +92,9 @@ func Init(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAM
 	//	cfg.Client.Provider = "consul"
 	//	cfg.Client.Config = new(store.Config)
 	//	cfg.Client.Config.ConnectionTimeout = 10 * time.Second
-
+	if Addresses != nil {
+		ipd.Addresses = *Addresses
+	}
 	ds, err := datastore.NewDataStore(datastore.GlobalScope, cfg)
 	if err != nil {
 		log.Errorf("Error returned from init: %s", err.Error())
