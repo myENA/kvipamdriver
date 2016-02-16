@@ -1,8 +1,8 @@
+//	This package is an experiment in making a remote ipam driver for docker.
+//	Most of the code here was lifted from github.com/docker/libnetwork/ipam
 package driver
 
 import (
-	// "github.com/docker/libnetwork/ipams/remote"
-	// "github.com/docker/libnetwork/ipams/remote/api"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/docker/go-plugins-helpers/ipam"
@@ -74,6 +74,7 @@ func (ipd *IPAMDriver) RequestAddress(req *ipam.RequestAddressRequest) (*ipam.Re
 	return resp, nil
 }
 
+// Releases an address (not just a clever name)
 func (ipd *IPAMDriver) ReleaseAddress(req *ipam.ReleaseAddressRequest) error {
 	log.Debugf("ReleaseAddress called with %#v", req)
 
@@ -84,15 +85,11 @@ func (ipd *IPAMDriver) ReleaseAddress(req *ipam.ReleaseAddressRequest) error {
 	return err
 }
 
-func Init(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAMDriver, error) {
+// This creates a new instance of IPAMDriver
+func NewIPAMDriver(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAMDriver, error) {
 	var err error
 	ipd := new(IPAMDriver)
 	log.Debugf("Init called")
-	//	cfg := new(datastore.ScopeCfg)
-	//	cfg.Client.Address = "cnllab01.dev.ena.net"
-	//	cfg.Client.Provider = "consul"
-	//	cfg.Client.Config = new(store.Config)
-	//	cfg.Client.Config.ConnectionTimeout = 10 * time.Second
 	if Addresses == nil {
 		err = fmt.Errorf("Invalid Addresses")
 		log.Error(err)
@@ -108,14 +105,12 @@ func Init(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAM
 		return nil, err
 	}
 
-	log.Debugf("dsg scope: %s", dsg.Scope())
-
 	dsl, err := datastore.NewDataStore(Addresses.LocalDefaultAddressSpace, cfg)
+
 	if err != nil {
 		log.Errorf("Error returned from init: %s", err.Error())
 		return nil, err
 	}
-	log.Debugf("dsl scope: %s", dsl.Scope())
 
 	ipd.Alloc, err = NewAllocator(dsl, dsg)
 
