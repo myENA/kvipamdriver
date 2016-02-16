@@ -95,13 +95,21 @@ func Init(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAM
 	if Addresses != nil {
 		ipd.Addresses = *Addresses
 	}
-	ds, err := datastore.NewDataStore(datastore.GlobalScope, cfg)
+	dsg, err := datastore.NewDataStore(datastore.GlobalScope, cfg)
+	
+	if err != nil {
+		log.Errorf("Error returned from init: %s", err.Error())
+		return nil, err
+	}
+ 
+ 	dsl, err := datastore.NewDataStore(datastore.LocalScope, cfg)
+	
 	if err != nil {
 		log.Errorf("Error returned from init: %s", err.Error())
 		return nil, err
 	}
 
-	ipd.Alloc, err = NewAllocator(ds, ds)
+	ipd.Alloc, err = NewAllocator(dsg, dsl)
 	if err != nil {
 		log.Errorf("NewAllocator returned error: %s", err.Error())
 		return nil, err
