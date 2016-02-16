@@ -37,5 +37,5 @@ func main() {
 		return
 	}
 	h := ipam.NewHandler(d)
-	h.ServeTCP("MySuperAwesomeIpam", ":8888")
+	h.ServeTCP("enaipamdriver", ":8888")
 }
