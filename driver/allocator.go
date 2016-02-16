@@ -50,22 +50,19 @@ func NewAllocator(lcDs, glDs datastore.DataStore) (*Allocator, error) {
 
 	// Initialize address spaces
 	a.addrSpaces = make(map[string]*addrSpace)
-	for _, aspc := range []struct {
-		as string
-		ds datastore.DataStore
-	}{
-		{localAddressSpace, lcDs},
-		{globalAddressSpace, glDs},
+	for _, ds := range []datastore.DataStore{
+		lcDs,
+		glDs,
 	} {
-		if aspc.ds == nil {
+		if ds == nil {
 			continue
 		}
 
-		a.addrSpaces[aspc.as] = &addrSpace{
+		a.addrSpaces[ds.Scope()] = &addrSpace{
 			subnets: map[SubnetKey]*PoolData{},
-			id:      dsConfigKey + "/" + aspc.as,
-			scope:   aspc.ds.Scope(),
-			ds:      aspc.ds,
+			id:      dsConfigKey + "/" + ds.Scope(),
+			scope:   ds.Scope(),
+			ds:      ds,
 			alloc:   a,
 		}
 	}

@@ -40,7 +40,6 @@ func main() {
 	cfg.Client.Address = "cnllab01.dev.ena.net:8500"
 	cfg.Client.Provider = "consul"
 	cfg.Client.Config = &store.Config{ConnectionTimeout: 10 * time.Second}
-	
 
 	addrs := new(ipam.AddressSpacesResponse)
 	addrs.GlobalDefaultAddressSpace = "MySuperAwesomeGlobal"
@@ -52,7 +51,7 @@ func main() {
 	}
 	log.Debugf("I'm listening")
 	h := ipam.NewHandler(d)
-	
+
 	err = h.ServeTCP("enaipamdriver", ":8888")
 	if err != nil {
 		log.Errorf("ServeTCP returned error: %s", err.Error())
