@@ -1,5 +1,6 @@
-//	This package is an experiment in making a remote ipam driver for docker.
-//	Most of the code here was lifted from github.com/docker/libnetwork/ipam
+// This package is an experiment in making a remote ipam driver for docker.
+// Most of the code here was lifted from github.com/docker/libnetwork/ipam,
+// which is copyright Docker Inc.
 package driver
 
 import (
