@@ -12,5 +12,9 @@ import:
   version: v0.1.2
 - package: github.com/docker/go-plugins-helpers
 - package: github.com/hashicorp/consul
-- package: github.com/vishvananda/netns
-  
+- package: github.com/vishvananda/netns 
+  vcs: git
+  version: master
+- package: github.com/vishvananda/netlink
+  vcs: git
+  version: master

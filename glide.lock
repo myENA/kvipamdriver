@@ -1,5 +1,5 @@
 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-updated: 2016-02-16T09:55:05.885423691-06:00
+updated: 2016-02-16T10:16:41.840717418-06:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c
@@ -204,11 +204,11 @@ imports:
 - name: github.com/inconshreveable/muxado
   version: f693c7e88ba316d1a0ae3e205e22a01aa3ec2848
 - name: github.com/influxdata/influxdb
-  version: 9d478fa5b322788e9486a97c3962e54bce47008b
+  version: 6bb1097d6b29c70cf14fd1a21c2955345565a099
 - name: github.com/influxdata/usage-client
   version: 475977e68d79883d9c8d67131c84e4241523f452
 - name: github.com/influxdb/influxdb
-  version: 9d478fa5b322788e9486a97c3962e54bce47008b
+  version: 6bb1097d6b29c70cf14fd1a21c2955345565a099
 - name: github.com/jinzhu/gorm
   version: 82d726bbfd8cefbe2dcdc7f7f0484551c0d40433
 - name: github.com/jmespath/go-jmespath
@@ -351,9 +351,11 @@ imports:
 - name: github.com/vdemeester/shakers
   version: 24d7f1d6a71aa5d9cbe7390e4afb66b7eef9e1b3
 - name: github.com/vishvananda/netlink
-  version: 1e2e08e8a2dcdacaae3f14ac44c5cfa31361f270
+  version: 377a62136007d17ce5e05d5a3f07e8ece6bf0ca7
+  vcs: git
 - name: github.com/vishvananda/netns
-  version: 604eaf189ee867d8c147fafc28def2394e878d25
+  version: f0b8d0aad33f2e47337fb9e7de620cc9c6243d3c
+  vcs: git
 - name: github.com/xiang90/probing
   version: 6a0cc1ae81b4cc11db5e491e030e4b98fba79c19
 - name: github.com/xordataexchange/crypt
