@@ -3,6 +3,7 @@ package driver
 import (
 	// "github.com/docker/libnetwork/ipams/remote"
 	// "github.com/docker/libnetwork/ipams/remote/api"
+	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/docker/go-plugins-helpers/ipam"
 	"github.com/docker/libnetwork/datastore"
@@ -92,18 +93,22 @@ func Init(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAM
 	//	cfg.Client.Provider = "consul"
 	//	cfg.Client.Config = new(store.Config)
 	//	cfg.Client.Config.ConnectionTimeout = 10 * time.Second
-	if Addresses != nil {
-		ipd.Addresses = *Addresses
+	if Addresses == nil {
+		err = fmt.Errorf("Invalid Addresses")
+		log.Error(err)
+		return nil, err
+
 	}
-	dsg, err := datastore.NewDataStore(datastore.GlobalScope, cfg)
-	
+	ipd.Addresses = *Addresses
+	dsg, err := datastore.NewDataStore(Addresses.GlobalDefaultAddressSpace, cfg)
+
 	if err != nil {
 		log.Errorf("Error returned from init: %s", err.Error())
 		return nil, err
 	}
- 
- 	dsl, err := datastore.NewDataStore(datastore.LocalScope, cfg)
-	
+
+	dsl, err := datastore.NewDataStore(Addresses.LocalDefaultAddressSpace, cfg)
+
 	if err != nil {
 		log.Errorf("Error returned from init: %s", err.Error())
 		return nil, err
