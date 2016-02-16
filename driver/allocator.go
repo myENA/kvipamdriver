@@ -50,10 +50,13 @@ func NewAllocator(lcDs, glDs datastore.DataStore) (*Allocator, error) {
 
 	// Initialize address spaces
 	a.addrSpaces = make(map[string]*addrSpace)
-	for _, ds := range []datastore.DataStore{
-		lcDs,
-		glDs,
-	} {
+
+	// Note - this is different from libnetwork version in that it keys
+	// the map by ds.Scope() versus using localAddressSpace /
+	// globalAddressSpace.  Also doesn't use the inline anon struct stuff
+	// since we're using scope as address space.  Also, ++readable. --NJ
+	dsen := []datastore.DataStore{lcDs, glDs}
+	for _, ds := range dsen {
 		if ds == nil {
 			continue
 		}

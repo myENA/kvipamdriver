@@ -17,7 +17,7 @@ const APP_VERSION = "0.1"
 // The flag package provides a default help printer via -h switch
 var versionFlag *bool = flag.Bool("v", false, "Print the version number.")
 
-var consulHostFlag *string = flag.String("consul", "", `consul address, ex consul.example.com:8500 . 
+var consulHostFlag *string = flag.String("consul", "", `consul address, ex consul.example.com:8500. 
 	If not set, inspects CONSUL_HTTP_ADDR environment variable.
 	Failing that, defaults to localhost:8500`)
 

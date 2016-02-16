@@ -1,6 +1,6 @@
 // This package is an experiment in making a remote ipam driver for docker.
 // Most of the code here was lifted from github.com/docker/libnetwork/ipam,
-// which is copyright Docker Inc.
+// the default docker ipam, which is copyright Docker Inc.
 package driver
 
 import (
@@ -16,6 +16,7 @@ type IPAMDriver struct {
 	Alloc     *Allocator
 }
 
+// Callback for our driver to determine whether or not it requires
 func (ipd *IPAMDriver) GetCapabilities() (*ipam.CapabilitiesResponse, error) {
 	log.Debugln("GetCapabilities() called")
 	return &ipam.CapabilitiesResponse{RequiresMACAddress: true}, nil
@@ -36,14 +37,18 @@ func (ipd *IPAMDriver) GetDefaultAddressSpaces() (*ipam.AddressSpacesResponse, e
 func (ipd *IPAMDriver) RequestPool(pool *ipam.RequestPoolRequest) (*ipam.RequestPoolResponse, error) {
 	log.Debugf("RequestPool called with argument %#v", pool)
 	key, nw, data, err := ipd.Alloc.RequestPool(pool.AddressSpace, pool.Pool, pool.SubPool, pool.Options, pool.V6)
+
 	if err != nil {
 		log.Errorf("RequestPool returned error: %s", err.Error())
 		return nil, err
 	}
-	resp := new(ipam.RequestPoolResponse)
-	resp.Pool = nw.String()
-	resp.PoolID = key
-	resp.Data = data
+
+	resp := &ipam.RequestPoolResponse{
+		Pool:   nw.String(),
+		PoolID: key,
+		Data:   data,
+	}
+
 	log.Debugf("RequestPool returning %#v", resp)
 	return resp, nil
 
@@ -51,16 +56,20 @@ func (ipd *IPAMDriver) RequestPool(pool *ipam.RequestPoolRequest) (*ipam.Request
 
 // Release the address from the specified pool ID
 func (ipd *IPAMDriver) ReleasePool(req *ipam.ReleasePoolRequest) error {
+
 	log.Debugf("ReleasePool called with %#v", req)
 	err := ipd.Alloc.ReleasePool(req.PoolID)
+
 	if err != nil {
 		log.Errorf("Error returned from ReleasePool: %s", err.Error())
 	}
+
 	return err
 }
 
 // Request an Address
 func (ipd *IPAMDriver) RequestAddress(req *ipam.RequestAddressRequest) (*ipam.RequestAddressResponse, error) {
+
 	log.Debugf("RequestAddress called with %#v", req)
 	ip := net.ParseIP(req.Address)
 	newip, data, err := ipd.Alloc.RequestAddress(req.PoolID, ip, req.Options)
@@ -89,7 +98,6 @@ func (ipd *IPAMDriver) ReleaseAddress(req *ipam.ReleaseAddressRequest) error {
 // This creates a new instance of IPAMDriver
 func NewIPAMDriver(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAMDriver, error) {
 	var err error
-	ipd := new(IPAMDriver)
 	log.Debugf("Init called")
 	if Addresses == nil {
 		err = fmt.Errorf("Invalid Addresses")
@@ -97,7 +105,6 @@ func NewIPAMDriver(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCf
 		return nil, err
 
 	}
-	ipd.Addresses = *Addresses
 
 	dsg, err := datastore.NewDataStore(Addresses.GlobalDefaultAddressSpace, cfg)
 
@@ -113,12 +120,14 @@ func NewIPAMDriver(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCf
 		return nil, err
 	}
 
+	ipd := &IPAMDriver{Addresses: *Addresses}
 	ipd.Alloc, err = NewAllocator(dsl, dsg)
 
 	if err != nil {
 		log.Errorf("NewAllocator returned error: %s", err.Error())
 		return nil, err
 	}
+
 	log.Debug("Init success")
 	return ipd, nil
 
