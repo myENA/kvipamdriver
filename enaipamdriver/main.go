@@ -40,6 +40,7 @@ func main() {
 	cfg.Client.Address = "cnllab01.dev.ena.net:8500"
 	cfg.Client.Provider = "consul"
 	cfg.Client.Config = &store.Config{ConnectionTimeout: 10 * time.Second}
+	
 
 	addrs := new(ipam.AddressSpacesResponse)
 	addrs.GlobalDefaultAddressSpace = "MySuperAwesomeGlobal"
