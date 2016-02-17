@@ -15,7 +15,7 @@ same subnet across multiple docker host without using swarm and
 overlay networks.  Overlay networks are difficult to expose outside of
 the docker swarm, but other options exists such as creating a custom
 docker bridge and having that bridge exist as part of a larger
-network.  In this case, however, if you aren'tcusing swarm / overlay,
+network.  In this case, however, if you aren't using swarm / overlay,
 the IPAM for bridge networks is always local to the machine, even
 though the functionality clearly exists to use a distributed KV store.
 The ultimate goal of this project is to allow the distributed nature
