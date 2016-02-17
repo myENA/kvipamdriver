@@ -67,7 +67,7 @@ func main() {
 	h := ipam.NewHandler(d)
 	log.Debugf("I'm listening on %s", *listenAddress)
 
-	err = h.ServeTCP("enaipamdriver", *listenAddress)
+	err = h.ServeTCP("kvipamdriver", *listenAddress)
 	if err != nil {
 		log.Errorf("ServeTCP returned error: %s", err.Error())
 	}
