@@ -1,4 +1,4 @@
-package: stash.corp.ena.net/rd/ena-ipamdriver.git
+package: github.com/myENA/kvipamdriver
 import:
 - package: github.com/docker/libnetwork
 - package: github.com/Sirupsen/logrus
