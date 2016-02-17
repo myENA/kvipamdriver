@@ -11,6 +11,7 @@ import (
 	"net"
 )
 
+// This implements the Ipam interface
 type IPAMDriver struct {
 	Addresses ipam.AddressSpacesResponse
 	Alloc     *Allocator
@@ -73,10 +74,12 @@ func (ipd *IPAMDriver) RequestAddress(req *ipam.RequestAddressRequest) (*ipam.Re
 	log.Debugf("RequestAddress called with %#v", req)
 	ip := net.ParseIP(req.Address)
 	newip, data, err := ipd.Alloc.RequestAddress(req.PoolID, ip, req.Options)
+
 	if err != nil {
 		log.Errorf("error returned from RequestAddress: %s", err.Error())
 		return nil, err
 	}
+
 	resp := new(ipam.RequestAddressResponse)
 	resp.Address = newip.String()
 	resp.Data = data
@@ -99,11 +102,11 @@ func (ipd *IPAMDriver) ReleaseAddress(req *ipam.ReleaseAddressRequest) error {
 func NewIPAMDriver(Addresses *ipam.AddressSpacesResponse, cfg *datastore.ScopeCfg) (*IPAMDriver, error) {
 	var err error
 	log.Debugf("Init called")
+
 	if Addresses == nil {
 		err = fmt.Errorf("Invalid Addresses")
 		log.Error(err)
 		return nil, err
-
 	}
 
 	dsg, err := datastore.NewDataStore(Addresses.GlobalDefaultAddressSpace, cfg)
