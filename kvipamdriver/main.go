@@ -7,8 +7,8 @@ import (
 	"github.com/docker/go-plugins-helpers/ipam"
 	"github.com/docker/libkv/store"
 	"github.com/docker/libnetwork/datastore"
-	"os"
 	"github.com/myENA/kvipamdriver/driver"
+	"os"
 	"time"
 )
 
