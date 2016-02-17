@@ -8,7 +8,7 @@ import (
 	"github.com/docker/libkv/store"
 	"github.com/docker/libnetwork/datastore"
 	"os"
-	"stash.corp.ena.net/rd/ena-ipamdriver.git/driver"
+	"github.com/myENA/kvipamdriver/driver"
 	"time"
 )
 
