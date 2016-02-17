@@ -44,7 +44,7 @@ of the default IPAM docker driver to work for non-overlay networks.
 ##Copyright
 
 As mentioned previously, this is mostly a copy of the Docker
-github.com/libnetwork/ipam package, with some minor modifications to
+github.com/docker/libnetwork/ipam package, with some minor modifications to
 allow it to run as a standalone remote IPAM driver and to always use a
 distributed KV store.  Those portions are copyright Docker Inc. under
 the Apache 2.0 license.  The rest is copyright Education Networks of
