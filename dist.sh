@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
 
 set -ex
 
-[ -z "${1}" ] && DISTFILE="kvipamdriver.tgz" || DISTFILE="${1}"
+[ -z "${1}" ] && DISTFILE="../kvipamdriver.tgz" || DISTFILE="${1}"
 
 
 BINNAME=kvipamdriver
@@ -19,7 +18,7 @@ cp ../../README.md .
 cp ../../kvipamdriver/$BINNAME .
 cd ..
 
-tar -czhf ../"${DISTFILE}" $BINNAME
+tar -czhf "${DISTFILE}" $BINNAME
 
 cd ..
 rm -rf tmp
