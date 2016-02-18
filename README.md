@@ -32,10 +32,10 @@ of the default IPAM docker driver to work for non-overlay networks.
 ##Installation Instructions:
     $ export GO15VENDOREXPERIMENT=1
     $ MYENAPATH=$GOPATH/src/github.com/myENA && \
-    mkdir -p $MYENAPATH  && \
-    cd $MYENAPATH && \
-    git clone https://github.com/myENA/kvipamdriver.git && \
-    cd kvipamdriver
+        mkdir -p $MYENAPATH  && \
+        cd $MYENAPATH && \
+        git clone https://github.com/myENA/kvipamdriver.git && \
+        cd kvipamdriver
     $ glide install
     $ cd kvipamdriver
     $ go build ./...
