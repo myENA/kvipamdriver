@@ -11,6 +11,8 @@ import:
   vcs: git
   version: v0.1.2
 - package: github.com/docker/go-plugins-helpers
+- package: github.com/coreos/go-systemd
+- package: github.com/opencontainers/runc
 - package: github.com/hashicorp/consul
   vcs: git
   version: v0.6.3

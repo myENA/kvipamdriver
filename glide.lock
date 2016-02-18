@@ -1,5 +1,5 @@
-hash: 08a97d23acfc4724e7a403562c2bbd3624c1e394e0cf6d8c1f7ea9a1791c8b32
-updated: 2016-02-18T17:19:34.015646968-06:00
+hash: e4602d7e2e200c704cc1fdab43b50038f4f4b3eb22c56f92cd6c6f10fb414b52
+updated: 2016-02-18T17:29:49.909850751-06:00
 imports:
 - name: github.com/armon/circbuf
   version: bbbad097214e2918d8543d5201d12bfd7bca254d
@@ -16,6 +16,8 @@ imports:
   version: 0f053fabc06119583d61937a0a06ef0ba0f1b301
 - name: github.com/BurntSushi/toml
   version: f706d00e3de6abe700c994cdd545a1a4915af060
+- name: github.com/codegangsta/cli
+  version: a65b733b303f0055f8d324d805f393cd3e7a7904
 - name: github.com/coreos/etcd
   version: e4561dd8cfb1163fb51afceca9c78aa89398e731
   subpackages:
@@ -24,6 +26,8 @@ imports:
   - pkg/types
   - Godeps/_workspace/src/github.com/ugorji/go/codec
   - Godeps/_workspace/src/golang.org/x/net/context
+- name: github.com/coreos/go-systemd
+  version: 7b2428fec40033549c68f54e26e89e7ca9a9ce31
 - name: github.com/DataDog/datadog-go
   version: 8b6f59aa4f252b3b547523c21381330138bfe3ac
   subpackages:
@@ -199,6 +203,10 @@ imports:
   version: 5c87c51cedf76a1737bf5ca3979e8644871598a6
 - name: github.com/mitchellh/mapstructure
   version: d2dd0262208475919e1a362f675cfc0e7c10e905
+- name: github.com/opencontainers/runc
+  version: e28cfafa6dff4e33b4697df59cb23710550dad17
+- name: github.com/opencontainers/specs
+  version: 25cbfc427ba6154016f33c7ed1b8ed43b8b7b7ed
 - name: github.com/ryanuber/columnize
   version: 983d3a5fab1bf04d1b412465d2d9f8430e2e917e
 - name: github.com/samuel/go-zookeeper
