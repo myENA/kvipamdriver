@@ -12,9 +12,17 @@ import:
   version: v0.1.2
 - package: github.com/docker/go-plugins-helpers
 - package: github.com/hashicorp/consul
+  vcs: git
+  version: v0.6.3
+- package: github.com/hashicorp/serf
+  vcs: git
+  version: v0.7.0
 - package: github.com/vishvananda/netns 
   vcs: git
   version: master
 - package: github.com/vishvananda/netlink
+  vcs: git
+  version: master
+- package: github.com/armon/go-metrics
   vcs: git
   version: master
