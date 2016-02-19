@@ -23,8 +23,8 @@ of the default IPAM docker driver to work for non-overlay networks.
 
 ##Build Requirements:
 - linux
-- go 1.5.x (tested on go 1.5.3)
-- glide 0.8.3
+- go 1.5.x+ (tested on go 1.5.3 and go 1.6)
+- glide 0.8.3+ (also tested in 0.9.0)
 
 ##Installation Requirements:
 - docker 1.9+ (tested on 1.10.1, might work on 1.9)
