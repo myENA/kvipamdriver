@@ -60,18 +60,16 @@ func NewAllocator(lcDs, glDs datastore.DataStore) (*Allocator, error) {
 		if ds == nil {
 			continue
 		}
-
-		a.addrSpaces[ds.Scope()] = &addrSpace{
+		scope := ds.Scope()
+		a.addrSpaces[scope] = &addrSpace{
 			subnets: map[SubnetKey]*PoolData{},
 			id:      dsConfigKey + "/" + ds.Scope(),
-			scope:   ds.Scope(),
+			scope:   scope,
 			ds:      ds,
 			alloc:   a,
 		}
+		a.checkConsistency(scope)
 	}
-
-	a.checkConsistency(localAddressSpace)
-	a.checkConsistency(globalAddressSpace)
 
 	return a, nil
 }
